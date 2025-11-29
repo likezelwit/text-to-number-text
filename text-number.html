@@ -808,6 +808,12 @@
       display: flex;
     }
 
+    .reverse-mode-selector {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
     @media (max-width: 576px) {
       .container {
         padding: 15px;
@@ -951,6 +957,16 @@
       </div>
 
       <div class="input-group">
+        <label for="reverseMode">Reverse Mode:</label>
+        <div class="reverse-mode-selector">
+          <div class="mode-option active" data-reverse-mode="standard">Standard</div>
+          <div class="mode-option" data-reverse-mode="advanced">Advanced</div>
+          <div class="mode-option" data-reverse-mode="minimal">Minimal</div>
+          <div class="mode-option" data-reverse-mode="custom">Custom</div>
+        </div>
+      </div>
+
+      <div class="input-group">
         <label for="reverseOutput">Result:</label>
         <div class="result-container">
           <textarea id="reverseOutput" rows="4" readonly></textarea>
@@ -1036,6 +1052,9 @@
         </div>
         <button class="add-mapping-btn" onclick="addCustomMapping()">
           <i class="fas fa-plus"></i> Add Mapping
+        </button>
+        <button class="primary-btn" onclick="saveCustomMapping()" style="margin-top: 8px;">
+          <i class="fas fa-save"></i> Save
         </button>
       </div>
       <div class="input-group">
@@ -1138,14 +1157,9 @@
       modeUsage: { standard: 0, advanced: 0, minimal: 0, custom: 0 }
     };
 
-    // Reverse mapping for standard mode
-    const reverseMap = {};
-    for (const key in standardMap) {
-      reverseMap[standardMap[key]] = key;
-    }
-
-    // Current mode
+    // Current modes
     let currentMode = 'standard';
+    let currentReverseMode = 'standard';
     let conversionHistory = JSON.parse(localStorage.getItem('conversionHistory')) || [];
     let clipboardMonitorActive = false;
     let lastClipboardContent = "";
@@ -1195,12 +1209,21 @@
         });
       });
 
-      document.querySelectorAll('.mode-option').forEach(option => {
+      document.querySelectorAll('[data-mode]').forEach(option => {
         option.addEventListener('click', function() {
-          document.querySelectorAll('.mode-option').forEach(o => o.classList.remove('active'));
+          document.querySelectorAll('[data-mode]').forEach(o => o.classList.remove('active'));
           this.classList.add('active');
           currentMode = this.dataset.mode;
           convert(); // Re-convert with new mode
+        });
+      });
+
+      document.querySelectorAll('[data-reverse-mode]').forEach(option => {
+        option.addEventListener('click', function() {
+          document.querySelectorAll('[data-reverse-mode]').forEach(o => o.classList.remove('active'));
+          this.classList.add('active');
+          currentReverseMode = this.dataset.reverseMode;
+          reverseConvert(); // Re-convert with new mode
         });
       });
 
@@ -1233,6 +1256,31 @@
         default:
           return standardMap;
       }
+    }
+
+    function getReverseMap() {
+      let map;
+      switch (currentReverseMode) {
+        case 'advanced':
+          map = advancedMap;
+          break;
+        case 'minimal':
+          map = minimalMap;
+          break;
+        case 'custom':
+          map = { ...standardMap, ...customMap };
+          break;
+        default:
+          map = standardMap;
+      }
+      
+      // Create reverse mapping
+      const reverseMap = {};
+      for (const key in map) {
+        reverseMap[map[key]] = key;
+      }
+      
+      return reverseMap;
     }
 
     function convert() {
@@ -1292,19 +1340,22 @@
       let result = "";
       let i = 0;
       
+      // Get the appropriate reverse map based on the selected mode
+      const reverseMap = getReverseMap();
+      
+      // Sort keys by length (longest first) to handle multi-character mappings
+      const sortedKeys = Object.keys(reverseMap).sort((a, b) => b.length - a.length);
+      
       while (i < text.length) {
         let found = false;
         
         // Try to match the longest possible mapping first
-        for (let len = 3; len >= 1; len--) {
-          if (i + len <= text.length) {
-            const substr = text.substring(i, i + len);
-            if (reverseMap[substr]) {
-              result += reverseMap[substr];
-              i += len;
-              found = true;
-              break;
-            }
+        for (const key of sortedKeys) {
+          if (text.substring(i, i + key.length) === key) {
+            result += reverseMap[key];
+            i += key.length;
+            found = true;
+            break;
           }
         }
         
@@ -1703,6 +1754,11 @@
       // If in custom mode, re-convert
       if (currentMode === 'custom') {
         convert();
+      }
+      
+      // If in reverse custom mode, re-convert
+      if (currentReverseMode === 'custom') {
+        reverseConvert();
       }
       
       showNotification("Custom mapping saved!");
