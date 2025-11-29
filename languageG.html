@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bahasa G Converter</title>
+</head>
+<body>
+  <h2>Bahasa G Converter</h2>
+  <input id="normalInput" placeholder="Teks biasa..." oninput="toBahasaG()">
+  <textarea id="bahasaGOutput" rows="2" readonly placeholder="Hasil bahasa G"></textarea>
+  
+  <br><br>
+  
+  <input id="gInput" placeholder="Teks bahasa G..." oninput="fromBahasaG()">
+  <textarea id="normalOutput" rows="2" readonly placeholder="Hasil teks biasa"></textarea>
+
+  <script>
+    // Mapping vokal → bahasa G
+    const gMap = { a: 'aga', e: 'ege', i: 'igi', o: 'ogo', u: 'ugu' };
+    const reverseGMap = { 'aga':'a', 'ege':'e', 'igi':'i', 'ogo':'o', 'ugu':'u' };
+
+    function toBahasaG() {
+      let text = document.getElementById('normalInput').value.toLowerCase();
+      let result = '';
+      for (let c of text) {
+        result += gMap[c] || c;
+      }
+      document.getElementById('bahasaGOutput').value = result;
+    }
+
+    function fromBahasaG() {
+      let text = document.getElementById('gInput').value.toLowerCase();
+      let result = '';
+      let i = 0;
+      while (i < text.length) {
+        let found = false;
+        // Cek panjang substring 3 dulu
+        if (i+3 <= text.length) {
+          let sub = text.substring(i, i+3);
+          if (reverseGMap[sub]) {
+            result += reverseGMap[sub];
+            i += 3;
+            found = true;
+          }
+        }
+        if (!found) {
+          result += text[i];
+          i++;
+        }
+      }
+      document.getElementById('normalOutput').value = result;
+    }
+  </script>
+</body>
+</html>
