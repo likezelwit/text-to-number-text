@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Text to Number (Leet) Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f2f5;
+      padding: 40px;
+      display: flex;
+      justify-content: center;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 12px;
+      width: 400px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      margin-top: 8px;
+      margin-bottom: 16px;
+      font-size: 16px;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 6px;
+    }
+    button:hover {
+      background: #1d4ed8;
+    }
+    .label {
+      font-weight: bold;
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Text → Number Converter</h2>
+    <p style="font-size:14px;color:#444;margin-top:-10px;">Konversi huruf menjadi angka berdasarkan kemiripan bentuk.</p>
+
+    <label>Enter text:</label>
+    <input id="inputText" placeholder="Type here..." oninput="convert()" />
+    <p style="font-size:13px;color:#666;margin-top:-10px;margin-bottom:10px;">Contoh: hello, selamat, zeli...</p>
+
+    <label>Result:</label>
+    <textarea id="output" rows="4" readonly></textarea>
+
+    <button onclick="copyResult()">Copy Result</button>
+
+    <div class="label">Penjelasan (Huruf → Angka):</div>
+    <div id="explain" style="font-size:14px;color:#444;white-space:pre-line; margin-top:4px;"></div>
+
+    <div class="label">Terjemahan:</div>
+    <div id="translation" style="font-size:14px;color:#555; margin-top:4px;"></div>
+  </div>
+
+  <script>
+    const map = {
+      a: "4",  b: "8",  c: "01", d: "02", e: "3",  f: "03",
+      g: "6",  h: "04", i: "1",  j: "05", k: "06", l: "1",
+      m: "07", n: "08", o: "0",  p: "09", q: "10", r: "11",
+      s: "5",  t: "7",  u: "12", v: "13", w: "14", x: "15",
+      y: "16", z: "2"
+    };
+
+    function convert() {
+      const text = document.getElementById("inputText").value.toLowerCase();
+      let result = "";
+      let explainText = "";
+
+      for (const c of text) {
+        const mapped = map[c] ?? c;
+        result += mapped;
+        if (map[c]) explainText += `${c} → ${mapped}, `;
+      }
+
+      document.getElementById("output").value = result;
+
+      document.getElementById("explain").innerText =
+        explainText.trim().replace(/,$/, "");
+
+      document.getElementById("translation").innerText =
+        text ? `Original text: ${text}` : "";
+    }
+
+    function copyResult() {
+      const out = document.getElementById("output");
+      out.select();
+      document.execCommand("copy");
+    }
+  </script>
+</body>
+</html>
