@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bahasa Monyet (a / aa / u)</title>
+</head>
+<body>
+  <h3>Bahasa Monyet (a · aa · u)</h3>
+
+  <label>Type here:</label><br>
+  <input id="inputText" type="text" oninput="toMonkey()" style="width:90%"><br><br>
+
+  <label>Result:</label><br>
+  <textarea id="output" rows="4" cols="60" readonly></textarea><br><br>
+
+  <button onclick="copyResult()">Copy Result</button>
+  <button onclick="clearAll()">Clear</button>
+
+<script>
+  // sets
+  const vowels = new Set(['a','e','i','o','u']);
+  const hard = new Set(['k','g','p','t','b','d','q']);
+  const soft = new Set(['m','n','s','l','r','h']);
+  // other letters default to hard-style 'a' (you can adjust)
+
+  function mapChar(ch){
+    if (ch === ' ') return 'u';            // space -> u
+    if (!/[a-z]/.test(ch)) return ch;      // non-letter: keep as is
+    if (vowels.has(ch)) return 'aa';
+    if (soft.has(ch)) return 'u';
+    if (hard.has(ch)) return 'a';
+    return 'a'; // default for remaining letters
+  }
+
+  function toMonkey(){
+    const raw = document.getElementById('inputText').value || '';
+    const s = raw.toLowerCase();
+    let outParts = [];
+    for (let i=0; i<s.length; i++){
+      const ch = s[i];
+      outParts.push(mapChar(ch));
+    }
+    // join with single spaces so result readable
+    // but we can keep without spaces if you prefer
+    const out = outParts.join(' ');
+    document.getElementById('output').value = out;
+  }
+
+  function copyResult(){
+    const out = document.getElementById('output');
+    if (!out.value) return;
+    out.select();
+    document.execCommand('copy');
+    alert('Copied!');
+  }
+
+  function clearAll(){
+    document.getElementById('inputText').value = '';
+    document.getElementById('output').value = '';
+    document.getElementById('inputText').focus();
+  }
+</script>
+</body>
+</html>
