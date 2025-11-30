@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Dry Text Simple</title>
+  <title>Dry Text Improved</title>
 </head>
 <body>
 
-  <h2>Dry Text (Simple)</h2>
+  <h2>Dry Text Improved</h2>
 
   <label>Type here:</label><br>
   <input id="inputText" type="text" oninput="runDry()"><br><br>
@@ -15,14 +15,25 @@
   <textarea id="output" rows="4" cols="40" readonly></textarea>
 
   <script>
-    function removeVowels(text) {
-      return text.replace(/[aeiouAEIOU]/g, "");
+    function dryKeepFirstVowel(text) {
+      return text.replace(/\b(\w)(\w*)\b/g, (match, firstChar, rest) => {
+        // cari vokal pertama
+        const vowelMatch = rest.match(/[aeiouAEIOU]/);
+        if (!vowelMatch) return match; // kalau tidak ada vokal
+        
+        const firstVowelIndex = vowelMatch.index;
+        
+        const before = rest.slice(0, firstVowelIndex + 1);  // sampai vokal pertama
+        const after = rest.slice(firstVowelIndex + 1).replace(/[aeiouAEIOU]/g, ""); // hapus vokal setelahnya
+        
+        return firstChar + before + after;
+      });
     }
 
     function runDry() {
       const input = document.getElementById("inputText").value;
-      const dry = removeVowels(input);
-      document.getElementById("output").value = dry;
+      const result = dryKeepFirstVowel(input);
+      document.getElementById("output").value = result;
     }
   </script>
 
