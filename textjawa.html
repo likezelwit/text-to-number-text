@@ -1,11 +1,9 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Indonesia → Jawa (Latin + Aksara) Converter</title>
+  <title>Indonesia ↔ Jawa (Latin + Aksara) Converter</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
     :root {
@@ -862,8 +860,8 @@
       <div class="intro-icon">
         <i class="fas fa-language"></i>
       </div>
-      <h1 class="intro-title">Welcome to Indonesia to Jawa Converter!</h1>
-      <p class="intro-subtitle">Konversi bahasa Indonesia ke Jawa (Latin + Aksara).</p>
+      <h1 class="intro-title">Welcome to Indonesia ↔ Jawa Converter!</h1>
+      <p class="intro-subtitle">Konversi dua arah antara bahasa Indonesia dan Jawa (Latin + Aksara).</p>
       <div class="intro-progress">
         <div class="intro-progress-bar"></div>
       </div>
@@ -873,8 +871,8 @@
   <div class="container">
     <div class="header">
       <div>
-        <h2>Indonesia → Jawa Converter</h2>
-        <p class="subtitle">Konversi bahasa Indonesia ke Jawa (Latin + Aksara).</p>
+        <h2>Indonesia ↔ Jawa Converter</h2>
+        <p class="subtitle">Konversi dua arah antara bahasa Indonesia dan Jawa (Latin + Aksara).</p>
       </div>
       <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
         <i class="fas fa-moon"></i>
@@ -889,41 +887,73 @@
     </div>
 
     <div class="tab-content active" id="converter">
-      <div class="input-group">
-        <label for="inputText">Type Indonesian text:</label>
-        <textarea id="inputText" rows="4" placeholder="Type here..." oninput="convert()"></textarea>
-        <p style="font-size:12px;color:#666;margin-top:-5px;margin-bottom:8px;">Contoh: terima kasih, apa kabar, selamat pagi...</p>
-      </div>
-
-      <div class="input-group">
-        <label for="jawaLatin">Jawa (Latin):</label>
-        <div class="result-container">
-          <textarea id="jawaLatin" rows="3" readonly></textarea>
-          <div class="char-count" id="latinCharCount">0 characters</div>
+      <div class="mode-selector">
+        <div class="mode-option active" id="indoToJawaMode">
+          Indonesia → Jawa
         </div>
-        <div class="button-group">
-          <button id="copyLatinBtn" class="copy-btn hidden" onclick="copyLatin()">
-            <i class="fas fa-copy"></i> Copy Jawa Latin
-          </button>
+        <div class="mode-option" id="jawaToIndoMode">
+          Jawa → Indonesia
         </div>
       </div>
 
-      <div class="input-group">
-        <label for="aksara">Aksara Jawa:</label>
-        <div class="result-container">
-          <textarea id="aksara" rows="3" readonly></textarea>
-          <div class="char-count" id="aksaraCharCount">0 characters</div>
+      <div id="indoToJawaConverter">
+        <div class="input-group">
+          <label for="inputText">Type Indonesian text:</label>
+          <textarea id="inputText" rows="4" placeholder="Type here..." oninput="convert()"></textarea>
+          <p style="font-size:12px;color:#666;margin-top:-5px;margin-bottom:8px;">Contoh: terima kasih, apa kabar, selamat pagi...</p>
         </div>
-        <div class="button-group">
-          <button id="copyAksaraBtn" class="copy-btn hidden" onclick="copyAksara()">
-            <i class="fas fa-copy"></i> Copy Aksara Jawa
-          </button>
+
+        <div class="input-group">
+          <label for="jawaLatin">Jawa (Latin):</label>
+          <div class="result-container">
+            <textarea id="jawaLatin" rows="3" readonly></textarea>
+            <div class="char-count" id="latinCharCount">0 characters</div>
+          </div>
+          <div class="button-group">
+            <button id="copyLatinBtn" class="copy-btn hidden" onclick="copyLatin()">
+              <i class="fas fa-copy"></i> Copy Jawa Latin
+            </button>
+          </div>
+        </div>
+
+        <div class="input-group">
+          <label for="aksara">Aksara Jawa:</label>
+          <div class="result-container">
+            <textarea id="aksara" rows="3" readonly></textarea>
+            <div class="char-count" id="aksaraCharCount">0 characters</div>
+          </div>
+          <div class="button-group">
+            <button id="copyAksaraBtn" class="copy-btn hidden" onclick="copyAksara()">
+              <i class="fas fa-copy"></i> Copy Aksara Jawa
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div id="jawaToIndoConverter" class="hidden">
+        <div class="input-group">
+          <label for="jawaInput">Type Jawa text (Latin or Aksara):</label>
+          <textarea id="jawaInput" rows="4" placeholder="Type Jawa text here..." oninput="convertReverse()"></textarea>
+          <p style="font-size:12px;color:#666;margin-top:-5px;margin-bottom:8px;">Contoh: matur nuwun, ngombe, ꦩꦠꦸꦂꦤꦸꦮꦸꦤ꧀, ꦔꦺꦴꦩ꧀ꦧꦺ...</p>
+        </div>
+
+        <div class="input-group">
+          <label for="indoResult">Indonesian:</label>
+          <div class="result-container">
+            <textarea id="indoResult" rows="3" readonly></textarea>
+            <div class="char-count" id="indoCharCount">0 characters</div>
+          </div>
+          <div class="button-group">
+            <button id="copyIndoBtn" class="copy-btn hidden" onclick="copyIndonesian()">
+              <i class="fas fa-copy"></i> Copy Indonesian
+            </button>
+          </div>
         </div>
       </div>
 
       <div class="button-group">
         <button id="copyAllBtn" class="primary-btn hidden" onclick="copyAll()">
-          <i class="fas fa-copy"></i> Copy Both
+          <i class="fas fa-copy"></i> Copy All
         </button>
         <button id="clearBtn" class="clear-btn hidden" onclick="clearAll()">
           <i class="fas fa-trash"></i> Clear
@@ -1056,6 +1086,12 @@
       "dulu": "mbiyen", "sebelum": "sakdurunge", "sesudah": "sawise"
     };
 
+    // Reverse dictionary (Jawa to Indonesia)
+    const reverseKamus = {};
+    for (const key in kamus) {
+      reverseKamus[kamus[key]] = key;
+    }
+
     // Aksara mapping (limited)
     const aksara = {
       "opo": "ꦎꦥꦺ", "sopo": "ꦱꦺꦴꦥꦺꦴ", "endi": "ꦌꦤ꧀ꦢꦶ",
@@ -1080,6 +1116,12 @@
       "podho": "ꦥꦺꦴꦝꦺꦴ", "yo": "ꦪꦺꦴ", "ora": "ꦲꦺꦴꦫ", "dudu": "ꦢꦸꦢꦸ"
     };
 
+    // Reverse aksara mapping (Aksara to Jawa Latin)
+    const reverseAksara = {};
+    for (const key in aksara) {
+      reverseAksara[aksara[key]] = key;
+    }
+
     // Templates
     let templates = JSON.parse(localStorage.getItem('jawaTemplates')) || [
       { text: "terima kasih", result: "matur nuwun" },
@@ -1092,11 +1134,14 @@
       totalConversions: 0,
       totalCharacters: 0,
       wordUsage: {},
-      outputUsage: { latin: 0, aksara: 0, both: 0 }
+      outputUsage: { latin: 0, aksara: 0, both: 0, reverse: 0 }
     };
 
     // Conversion history
     let conversionHistory = JSON.parse(localStorage.getItem('jawaConversionHistory')) || [];
+
+    // Current conversion mode
+    let conversionMode = 'indoToJawa'; // Default mode
 
     // Initialize
     document.addEventListener('DOMContentLoaded', function() {
@@ -1143,6 +1188,25 @@
         this.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         localStorage.setItem('theme', isDark ? 'dark' : 'light');
       });
+
+      // Set up mode selector
+      document.getElementById('indoToJawaMode').addEventListener('click', function() {
+        conversionMode = 'indoToJawa';
+        document.getElementById('indoToJawaMode').classList.add('active');
+        document.getElementById('jawaToIndoMode').classList.remove('active');
+        document.getElementById('indoToJawaConverter').classList.remove('hidden');
+        document.getElementById('jawaToIndoConverter').classList.add('hidden');
+        clearAll();
+      });
+
+      document.getElementById('jawaToIndoMode').addEventListener('click', function() {
+        conversionMode = 'jawaToIndo';
+        document.getElementById('jawaToIndoMode').classList.add('active');
+        document.getElementById('indoToJawaMode').classList.remove('active');
+        document.getElementById('jawaToIndoConverter').classList.remove('hidden');
+        document.getElementById('indoToJawaConverter').classList.add('hidden');
+        clearAll();
+      });
     });
 
     function simpleLookup(word){
@@ -1153,6 +1217,16 @@
       if(kamus[cleaned]) return kamus[cleaned];
 
       return phoneticFallback(cleaned);
+    }
+
+    function simpleReverseLookup(word){
+      const lw = word.toLowerCase();
+      if(reverseKamus[lw]) return reverseKamus[lw];
+
+      const cleaned = lw.replace(/[.,!?;:]/g, "").trim();
+      if(reverseKamus[cleaned]) return reverseKamus[cleaned];
+
+      return word; // Return original if no translation found
     }
 
     function phoneticFallback(w){
@@ -1232,6 +1306,74 @@
       updateConversionStats(trimmed, jawaText, aksParts.join(' '));
     }
 
+    function convertReverse(){
+      const text = document.getElementById("jawaInput").value || "";
+      const trimmed = text.trim();
+
+      if(!trimmed){
+        document.getElementById("indoResult").value = "";
+        document.getElementById("indoCharCount").textContent = "0 characters";
+        document.getElementById("copyIndoBtn").classList.add("hidden");
+        document.getElementById("copyAllBtn").classList.add("hidden");
+        document.getElementById("clearBtn").classList.add("hidden");
+        return;
+      }
+
+      // Check if input contains Aksara Jawa
+      const hasAksara = /[\uA980-\uA9DF]/.test(trimmed);
+      
+      let jawaText = trimmed;
+      
+      // If input contains Aksara, convert to Latin first
+      if (hasAksara) {
+        // Replace known Aksara with Latin
+        for (const aksaraKey in reverseAksara) {
+          jawaText = jawaText.replace(new RegExp(aksaraKey, 'g'), reverseAksara[aksaraKey]);
+        }
+      }
+
+      // Now convert from Jawa Latin to Indonesian
+      const words = jawaText.toLowerCase().split(/\s+/);
+      
+      // build output by trying to match longest phrases (3,2,1 words)
+      const indoParts = [];
+      for(let i=0; i<words.length;){
+        let matched = false;
+        // try 3-word phrase
+        for(let len = 3; len >= 1; len--){
+          if(i + len <= words.length){
+            const phrase = words.slice(i, i+len).join(' ');
+            if(reverseKamus[phrase]){
+              indoParts.push(reverseKamus[phrase]);
+              i += len;
+              matched = true;
+              break;
+            }
+          }
+        }
+        if(!matched){
+          // fallback: translate single word
+          indoParts.push(simpleReverseLookup(words[i]));
+          i++;
+        }
+      }
+
+      const indoText = indoParts.join(' ');
+      document.getElementById('indoResult').value = indoText;
+      document.getElementById('indoCharCount').textContent = `${indoText.length} characters`;
+
+      // Show buttons
+      document.getElementById("copyIndoBtn").classList.remove("hidden");
+      document.getElementById("copyAllBtn").classList.remove("hidden");
+      document.getElementById("clearBtn").classList.remove("hidden");
+
+      // Add to history
+      addToHistory(trimmed, indoText, '');
+      
+      // Update stats
+      updateConversionStats(trimmed, indoText, '', true);
+    }
+
     function copyLatin(){
       const el = document.getElementById('jawaLatin');
       if(!el.value) return;
@@ -1252,21 +1394,50 @@
       saveStats();
     }
 
+    function copyIndonesian(){
+      const el = document.getElementById('indoResult');
+      if(!el.value) return;
+      el.select();
+      document.execCommand('copy');
+      showNotification('Copied Indonesian');
+      stats.outputUsage.reverse++;
+      saveStats();
+    }
+
     function copyAll(){
-      const out = document.getElementById('jawaLatin').value + '\n' + document.getElementById('aksara').value;
-      navigator.clipboard.writeText(out).then(()=>showNotification('Copied both outputs'));
-      stats.outputUsage.both++;
+      let out = '';
+      if (conversionMode === 'indoToJawa') {
+        out = document.getElementById('jawaLatin').value + '\n' + document.getElementById('aksara').value;
+      } else {
+        out = document.getElementById('indoResult').value;
+      }
+      
+      navigator.clipboard.writeText(out).then(()=>showNotification('Copied all outputs'));
+      
+      if (conversionMode === 'indoToJawa') {
+        stats.outputUsage.both++;
+      } else {
+        stats.outputUsage.reverse++;
+      }
       saveStats();
     }
 
     function clearAll(){
-      document.getElementById('inputText').value = '';
-      document.getElementById('jawaLatin').value = '';
-      document.getElementById('aksara').value = '';
-      document.getElementById("latinCharCount").textContent = "0 characters";
-      document.getElementById("aksaraCharCount").textContent = "0 characters";
-      document.getElementById("copyLatinBtn").classList.add("hidden");
-      document.getElementById("copyAksaraBtn").classList.add("hidden");
+      if (conversionMode === 'indoToJawa') {
+        document.getElementById('inputText').value = '';
+        document.getElementById('jawaLatin').value = '';
+        document.getElementById('aksara').value = '';
+        document.getElementById("latinCharCount").textContent = "0 characters";
+        document.getElementById("aksaraCharCount").textContent = "0 characters";
+        document.getElementById("copyLatinBtn").classList.add("hidden");
+        document.getElementById("copyAksaraBtn").classList.add("hidden");
+      } else {
+        document.getElementById('jawaInput').value = '';
+        document.getElementById('indoResult').value = '';
+        document.getElementById("indoCharCount").textContent = "0 characters";
+        document.getElementById("copyIndoBtn").classList.add("hidden");
+      }
+      
       document.getElementById("copyAllBtn").classList.add("hidden");
       document.getElementById("clearBtn").classList.add("hidden");
     }
@@ -1282,17 +1453,18 @@
       }, 3000);
     }
 
-    function addToHistory(original, latin, aksara) {
+    function addToHistory(original, result1, result2) {
       // Check if this conversion already exists in history
       const exists = conversionHistory.some(item => 
-        item.original === original && item.latin === latin && item.aksara === aksara
+        item.original === original && item.result1 === result1 && item.result2 === result2
       );
       
       if (!exists) {
         conversionHistory.unshift({
           original,
-          latin,
-          aksara,
+          result1,
+          result2,
+          mode: conversionMode,
           timestamp: new Date().toISOString()
         });
         
@@ -1326,9 +1498,14 @@
         const date = new Date(item.timestamp);
         const formattedDate = `${date.toLocaleDateString()} ${date.toLocaleTimeString()}`;
         
+        let resultText = item.result1;
+        if (item.mode === 'indoToJawa' && item.result2) {
+          resultText = `${item.result1} | ${item.result2}`;
+        }
+        
         historyItem.innerHTML = `
           <div class="history-text">${item.original}</div>
-          <div class="history-result">${item.latin}</div>
+          <div class="history-result">${resultText}</div>
           <button class="delete-history" onclick="deleteHistoryItem(${index})" title="Delete">
             <i class="fas fa-times"></i>
           </button>
@@ -1336,13 +1513,21 @@
         
         historyItem.addEventListener('click', function(e) {
           if (!e.target.closest('.delete-history')) {
-            document.getElementById('inputText').value = item.original;
-            document.getElementById('jawaLatin').value = item.latin;
-            document.getElementById('aksara').value = item.aksara;
-            document.getElementById('latinCharCount').textContent = `${item.latin.length} characters`;
-            document.getElementById('aksaraCharCount').textContent = `${item.aksara.length} characters`;
-            document.getElementById('copyLatinBtn').classList.remove('hidden');
-            document.getElementById('copyAksaraBtn').classList.remove('hidden');
+            if (item.mode === 'indoToJawa') {
+              document.getElementById('inputText').value = item.original;
+              document.getElementById('jawaLatin').value = item.result1;
+              document.getElementById('aksara').value = item.result2;
+              document.getElementById('latinCharCount').textContent = `${item.result1.length} characters`;
+              document.getElementById('aksaraCharCount').textContent = `${item.result2.length} characters`;
+              document.getElementById('copyLatinBtn').classList.remove('hidden');
+              document.getElementById('copyAksaraBtn').classList.remove('hidden');
+            } else {
+              document.getElementById('jawaInput').value = item.original;
+              document.getElementById('indoResult').value = item.result1;
+              document.getElementById('indoCharCount').textContent = `${item.result1.length} characters`;
+              document.getElementById('copyIndoBtn').classList.remove('hidden');
+            }
+            
             document.getElementById('copyAllBtn').classList.remove('hidden');
             document.getElementById('clearBtn').classList.remove('hidden');
             
@@ -1351,6 +1536,13 @@
             document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
             document.querySelector('[data-tab="converter"]').classList.add('active');
             document.getElementById('converter').classList.add('active');
+            
+            // Switch to the appropriate mode
+            if (item.mode === 'indoToJawa') {
+              document.getElementById('indoToJawaMode').click();
+            } else {
+              document.getElementById('jawaToIndoMode').click();
+            }
           }
         });
         
@@ -1409,6 +1601,11 @@
     }
 
     function useTemplate(text) {
+      // Ensure we're in the right mode
+      if (conversionMode !== 'indoToJawa') {
+        document.getElementById('indoToJawaMode').click();
+      }
+      
       document.getElementById('inputText').value = text;
       convert();
       
@@ -1468,7 +1665,7 @@
       showNotification("Template removed!");
     }
 
-    function updateConversionStats(text, latin, aksara) {
+    function updateConversionStats(text, result1, result2, isReverse = false) {
       stats.totalConversions++;
       stats.totalCharacters += text.length;
       
