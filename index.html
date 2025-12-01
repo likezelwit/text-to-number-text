@@ -142,6 +142,117 @@
       color: var(--warning-color);
     }
 
+    /* Token Display */
+    .token-display {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(67, 97, 238, 0.1);
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      color: var(--primary-color);
+    }
+
+    body.dark-mode .token-display {
+      background: rgba(6, 255, 165, 0.1);
+      color: var(--success-color);
+    }
+
+    .token-icon {
+      font-size: 18px;
+    }
+
+    .token-count {
+      font-size: 16px;
+    }
+
+    .token-reset {
+      font-size: 12px;
+      opacity: 0.8;
+    }
+
+    /* Login Button */
+    .login-btn {
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .login-btn:hover {
+      background: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .user-menu {
+      position: relative;
+    }
+
+    .user-avatar {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-weight: 600;
+    }
+
+    .user-dropdown {
+      position: absolute;
+      top: 45px;
+      right: 0;
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+      min-width: 200px;
+      display: none;
+      z-index: 1000;
+    }
+
+    body.dark-mode .user-dropdown {
+      background: rgba(30, 30, 46, 0.95);
+    }
+
+    .user-dropdown.active {
+      display: block;
+    }
+
+    .user-dropdown a {
+      display: block;
+      padding: 12px 15px;
+      color: var(--dark-color);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    body.dark-mode .user-dropdown a {
+      color: #f8f9fa;
+    }
+
+    .user-dropdown a:hover {
+      background: rgba(67, 97, 238, 0.1);
+    }
+
+    .user-dropdown a:first-child {
+      border-radius: var(--border-radius) var(--border-radius) 0 0;
+    }
+
+    .user-dropdown a:last-child {
+      border-radius: 0 0 var(--border-radius) var(--border-radius);
+    }
+
     /* Hero Section */
     .hero {
       padding: 80px 5%;
@@ -414,6 +525,45 @@
       background: rgba(30, 30, 46, 0.95);
     }
 
+    .faq-tabs {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    body.dark-mode .faq-tabs {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .faq-tab {
+      padding: 12px 20px;
+      font-weight: 600;
+      color: var(--gray-color);
+      cursor: pointer;
+      transition: var(--transition);
+      border-bottom: 3px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .faq-tab.active {
+      color: var(--primary-color);
+      border-bottom-color: var(--primary-color);
+    }
+
+    body.dark-mode .faq-tab.active {
+      color: var(--success-color);
+      border-bottom-color: var(--success-color);
+    }
+
+    .faq-content {
+      display: none;
+    }
+
+    .faq-content.active {
+      display: block;
+    }
+
     .faq-item {
       margin-bottom: 20px;
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -471,6 +621,169 @@
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
+    }
+
+    /* Login Modal */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 2000;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      border-radius: var(--border-radius);
+      padding: 30px;
+      width: 90%;
+      max-width: 500px;
+      position: relative;
+      animation: modalFadeIn 0.3s ease;
+    }
+
+    body.dark-mode .modal-content {
+      background: rgba(30, 30, 46, 0.95);
+    }
+
+    @keyframes modalFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: var(--gray-color);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--danger-color);
+    }
+
+    .modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    body.dark-mode .modal-title {
+      color: var(--success-color);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--dark-color);
+    }
+
+    body.dark-mode .form-group label {
+      color: #f8f9fa;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      transition: var(--transition);
+    }
+
+    body.dark-mode .form-group input {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: #f8f9fa;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 25px;
+    }
+
+    .form-buttons button {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-login {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-login:hover {
+      background: var(--secondary-color);
+    }
+
+    .btn-cancel {
+      background: rgba(0, 0, 0, 0.1);
+      color: var(--dark-color);
+    }
+
+    body.dark-mode .btn-cancel {
+      background: rgba(255, 255, 255, 0.1);
+      color: #f8f9fa;
+    }
+
+    .btn-cancel:hover {
+      background: rgba(0, 0, 0, 0.2);
+    }
+
+    .switch-form {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--gray-color);
+    }
+
+    .switch-form a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    body.dark-mode .switch-form a {
+      color: var(--success-color);
     }
 
     /* Footer */
@@ -614,6 +927,15 @@
       .social-links {
         justify-content: center;
       }
+
+      .token-display {
+        display: none;
+      }
+
+      .faq-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
     }
 
     /* Notification */
@@ -655,9 +977,29 @@
         <li><a href="#faq">FAQ</a></li>
         <li><a href="#contact">Contact</a></li>
         <li>
+          <div class="token-display">
+            <i class="fas fa-coins token-icon"></i>
+            <span class="token-count" id="tokenCount">50</span>
+            <span class="token-reset" id="tokenReset">3:00:00</span>
+          </div>
+        </li>
+        <li>
           <button class="theme-toggle" id="themeToggle" title="Toggle Dark Mode">
             <i class="fas fa-moon"></i>
           </button>
+        </li>
+        <li id="loginContainer">
+          <button class="login-btn" id="loginBtn" onclick="openLoginModal()">
+            <i class="fas fa-sign-in-alt"></i> Login
+          </button>
+          <div class="user-menu" id="userMenu" style="display: none;">
+            <div class="user-avatar" id="userAvatar" onclick="toggleUserDropdown()">U</div>
+            <div class="user-dropdown" id="userDropdown">
+              <a href="#"><i class="fas fa-user"></i> Profile</a>
+              <a href="#"><i class="fas fa-cog"></i> Settings</a>
+              <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
+          </div>
         </li>
       </ul>
       <button class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -691,7 +1033,7 @@
       
       <div class="cards-grid">
         <!-- Text to Number Card -->
-        <a href="text-number.html" class="card">
+        <a href="text-number.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-hashtag"></i>
           </div>
@@ -703,7 +1045,7 @@
         </a>
 
         <!-- Language G Card -->
-        <a href="languageG.html" class="card">
+        <a href="languageG.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-language"></i>
           </div>
@@ -715,7 +1057,7 @@
         </a>
 
         <!-- Dry Text Card -->
-        <a href="drytext.html" class="card">
+        <a href="drytext.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-tint"></i>
           </div>
@@ -727,7 +1069,7 @@
         </a>
 
         <!-- Long Text Card -->
-        <a href="longtext.html" class="card">
+        <a href="longtext.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-align-left"></i>
           </div>
@@ -739,7 +1081,7 @@
         </a>
 
         <!-- Monkey Text Card -->
-        <a href="monkeytext.html" class="card">
+        <a href="monkeytext.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-paw"></i>
           </div>
@@ -751,7 +1093,7 @@
         </a>
 
         <!-- CatText Card -->
-        <a href="Cattext.html" class="card">
+        <a href="Cattext.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-cat"></i>
           </div>
@@ -763,7 +1105,7 @@
         </a>
 
         <!-- AlienText Card -->
-        <a href="AlienText.html" class="card">
+        <a href="AlienText.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-user-astronaut"></i>
           </div>
@@ -775,12 +1117,24 @@
         </a>
 
         <!-- HacKerTEXT Card -->
-        <a href="HackerTXT.html" class="card">
+        <a href="HackerTXT.html" class="card" onclick="useToken()">
           <div class="card-icon">
             <i class="fas fa-terminal"></i>
           </div>
           <h3>HacKerTEXT</h3>
           <p>Transform your text into hacker-style formatting with special characters, alternating caps, and code-like elements for that cyberpunk aesthetic.</p>
+          <div class="card-btn">
+            <i class="fas fa-arrow-right"></i> Try Now
+          </div>
+        </a>
+
+        <!-- Statistik & Analisis Teks Card -->
+        <a href="Statistik-AnalisisTeks.html" class="card" onclick="useToken()">
+          <div class="card-icon">
+            <i class="fas fa-chart-bar"></i>
+          </div>
+          <h3>Statistik & Analisis Teks</h3>
+          <p>Analyze text statistics including character count, word count, reading time, and most frequent words. Get detailed insights about your text.</p>
           <div class="card-btn">
             <i class="fas fa-arrow-right"></i> Try Now
           </div>
@@ -792,113 +1146,208 @@
     <section class="faq-section" id="faq">
       <h2 class="section-title" style="color: var(--primary-color); margin-bottom: 30px;">Frequently Asked Questions</h2>
       
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>What is Text to Number conversion?</span>
-          <i class="fas fa-chevron-down"></i>
+      <div class="faq-tabs">
+        <div class="faq-tab active" onclick="switchTab('general')">General</div>
+        <div class="faq-tab" onclick="switchTab('tools')">Tools</div>
+        <div class="faq-tab" onclick="switchTab('account')">Account</div>
+        <div class="faq-tab" onclick="switchTab('tokens')">Tokens</div>
+      </div>
+      
+      <div class="faq-content active" id="general">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is Text Converter?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Text Converter is a web application that provides various tools to transform and analyze text in different ways. From converting text to numbers to analyzing text statistics, our tools help you manipulate text for various purposes.
+          </div>
         </div>
-        <div class="faq-answer">
-          Text to Number conversion is a process that transforms alphabetic characters into numbers based on their visual similarity. For example, 'E' becomes '3', 'O' becomes '0', and 'A' becomes '4'. This is often used in leet speak and for creating unique numeric representations of text.
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>Is this service free to use?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Yes, our basic service is free to use with a token system. Free users get 50 tokens that reset every 3 hours, while logged-in users get 100 tokens that reset every 2.5 hours. Each text conversion consumes one token.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>Can I use this on mobile devices?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Absolutely! Our website is fully responsive and works perfectly on all devices including smartphones, tablets, and desktop computers. The interface automatically adjusts to provide the best experience on your device.
+          </div>
         </div>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>How does Language G work?</span>
-          <i class="fas fa-chevron-down"></i>
+      
+      <div class="faq-content" id="tools">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is Text to Number conversion?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Text to Number conversion is a process that transforms alphabetic characters into numbers based on their visual similarity. For example, 'E' becomes '3', 'O' becomes '0', and 'A' becomes '4'. This is often used in leet speak and for creating unique numeric representations of text.
+          </div>
         </div>
-        <div class="faq-answer">
-          Language G is a specialized language processing tool that focuses on Indonesian language features. It can help with translation, transliteration, and various text processing tasks specific to Indonesian language structure and grammar.
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How does Language G work?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Language G is a specialized language processing tool that focuses on Indonesian language features. It can help with translation, transliteration, and various text processing tasks specific to Indonesian language structure and grammar.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What is Dry Text conversion?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Dry Text conversion removes most vowels from text while keeping only the first vowel in each word. This creates a more condensed version of your text that's still readable but uses fewer characters. It's useful for creating unique usernames, short messages, or just for fun text transformations.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How can Long Text tool help me?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            The Long Text tool is designed to help you process and analyze extensive documents. It provides features for formatting, summarizing, and extracting key information from large amounts of text. It's perfect for students, researchers, or anyone working with lengthy documents.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What makes Monkey Text special?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Monkey Text adds playful modifications to your text, creating a fun and unique style. It can randomize capitalization, add special characters, or apply other creative transformations to make your text stand out. It's great for social media posts, creative writing, or just adding some fun to your messages.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What can I do with CatText?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            CatText transforms your regular text into adorable cat-style messages with playful modifications. It adds cat-like expressions, purrfect formatting, and feline-themed elements to make your text more fun and expressive. It's perfect for cat lovers or anyone wanting to add a cute touch to their messages.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How does AlienText work?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            AlienText converts your regular text into an otherworldly language using unique symbols, special characters, and extraterrestrial formatting. It creates mysterious messages that appear to be from another planet, perfect for sci-fi themed content, creative writing, or just having fun with friends.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What makes HacKerTEXT unique?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            HacKerTEXT transforms your text into a hacker-style format with alternating capitalization, special character substitutions, and code-like elements. It creates that distinctive cyberpunk aesthetic often seen in movies and games, perfect for creating tech-themed content or just for fun.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What can I do with Statistik & Analisis Teks?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Statistik & Analisis Teks provides detailed statistics about your text including character count (with and without spaces), word count, sentence count, paragraph count, estimated reading time, and most frequently used words. It's perfect for writers, students, and anyone who needs to analyze text for various purposes.
+          </div>
         </div>
       </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>What is Dry Text conversion?</span>
-          <i class="fas fa-chevron-down"></i>
+      
+      <div class="faq-content" id="account">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I create an account?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            To create an account, click on the Login button in the top right corner of the page, then select the option to create a new account. Fill in your details and submit the form. Once registered, you'll have access to additional features and more tokens.
+          </div>
         </div>
-        <div class="faq-answer">
-          Dry Text conversion removes most vowels from text while keeping only the first vowel in each word. This creates a more condensed version of your text that's still readable but uses fewer characters. It's useful for creating unique usernames, short messages, or just for fun text transformations.
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What are the benefits of having an account?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Having an account gives you several benefits: more tokens (100 instead of 50), faster token reset time (2.5 hours instead of 3 hours), ability to save your conversion history, and access to premium features in the future.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How do I reset my password?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            To reset your password, click on the Login button and then select the "Forgot Password" option. Enter your email address, and we'll send you instructions on how to reset your password.
+          </div>
         </div>
       </div>
+      
+      <div class="faq-content" id="tokens">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>What are tokens and how do they work?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Tokens are credits that you use to access our text conversion tools. Each time you use a tool to convert text, one token is deducted from your balance. Free users get 50 tokens that reset every 3 hours, while logged-in users get 100 tokens that reset every 2.5 hours.
+          </div>
+        </div>
 
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>How can Long Text tool help me?</span>
-          <i class="fas fa-chevron-down"></i>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>How can I check my token balance?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Your current token balance is displayed in the top navigation bar next to the theme toggle button. It shows your current token count and the time remaining until your tokens reset.
+          </div>
         </div>
-        <div class="faq-answer">
-          The Long Text tool is designed to help you process and analyze extensive documents. It provides features for formatting, summarizing, and extracting key information from large amounts of text. It's perfect for students, researchers, or anyone working with lengthy documents.
-        </div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>What makes Monkey Text special?</span>
-          <i class="fas fa-chevron-down"></i>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>When do my tokens reset?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            For free users, tokens reset every 3 hours. For logged-in users, tokens reset every 2.5 hours. The countdown timer shows how much time is left until your next reset.
+          </div>
         </div>
-        <div class="faq-answer">
-          Monkey Text adds playful modifications to your text, creating a fun and unique style. It can randomize capitalization, add special characters, or apply other creative transformations to make your text stand out. It's great for social media posts, creative writing, or just adding some fun to your messages.
-        </div>
-      </div>
 
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>What can I do with CatText?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          CatText transforms your regular text into adorable cat-style messages with playful modifications. It adds cat-like expressions, purrfect formatting, and feline-themed elements to make your text more fun and expressive. It's perfect for cat lovers or anyone wanting to add a cute touch to their messages.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>How does AlienText work?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          AlienText converts your regular text into an otherworldly language using unique symbols, special characters, and extraterrestrial formatting. It creates mysterious messages that appear to be from another planet, perfect for sci-fi themed content, creative writing, or just having fun with friends.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>What makes HacKerTEXT unique?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          HacKerTEXT transforms your text into a hacker-style format with alternating capitalization, special character substitutions, and code-like elements. It creates that distinctive cyberpunk aesthetic often seen in movies and games, perfect for creating tech-themed content or just for fun.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>Is this service free to use?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Yes, all our conversion tools are completely free to use. You can convert as much text as you need without any charges or limitations.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>Can I use this on mobile devices?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Absolutely! Our website is fully responsive and works perfectly on all devices including smartphones, tablets, and desktop computers. The interface automatically adjusts to provide the best experience on your device.
-        </div>
-      </div>
-
-      <div class="faq-item">
-        <div class="faq-question" onclick="toggleFAQ(this)">
-          <span>How do I save my conversion history?</span>
-          <i class="fas fa-chevron-down"></i>
-        </div>
-        <div class="faq-answer">
-          Your conversion history is automatically saved in your browser's local storage. You can access it anytime from the History tab in the converter. You can also export your history as a JSON file for backup.
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFAQ(this)">
+            <span>Can I get more tokens without waiting for the reset?</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="faq-answer">
+            Currently, the only way to get more tokens is to wait for the reset or to create an account, which gives you more tokens and a faster reset time. In the future, we may offer premium plans with additional tokens.
+          </div>
         </div>
       </div>
     </section>
@@ -943,6 +1392,7 @@
           <li><a href="Cattext.html">CatText</a></li>
           <li><a href="AlienText.html">AlienText</a></li>
           <li><a href="HackerTXT.html">HacKerTEXT</a></li>
+          <li><a href="Statistik-AnalisisTeks.html">Statistik & Analisis Teks</a></li>
         </ul>
       </div>
 
@@ -968,6 +1418,78 @@
     </div>
   </footer>
 
+  <!-- Login Modal -->
+  <div class="modal" id="loginModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeLoginModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="modal-title" id="modalTitle">Login</h2>
+      
+      <form id="loginForm" onsubmit="handleLogin(event)">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" required>
+        </div>
+        
+        <div class="form-buttons">
+          <button type="submit" class="btn-login">Login</button>
+          <button type="button" class="btn-cancel" onclick="closeLoginModal()">Cancel</button>
+        </div>
+      </form>
+      
+      <div class="switch-form">
+        Don't have an account? <a href="#" onclick="switchToRegister()">Register</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Register Modal -->
+  <div class="modal" id="registerModal">
+    <div class="modal-content">
+      <button class="modal-close" onclick="closeRegisterModal()">
+        <i class="fas fa-times"></i>
+      </button>
+      <h2 class="modal-title">Register</h2>
+      
+      <form id="registerForm" onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="regName">Name</label>
+          <input type="text" id="regName" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="regEmail">Email</label>
+          <input type="email" id="regEmail" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="regPassword">Password</label>
+          <input type="password" id="regPassword" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="regConfirmPassword">Confirm Password</label>
+          <input type="password" id="regConfirmPassword" required>
+        </div>
+        
+        <div class="form-buttons">
+          <button type="submit" class="btn-login">Register</button>
+          <button type="button" class="btn-cancel" onclick="closeRegisterModal()">Cancel</button>
+        </div>
+      </form>
+      
+      <div class="switch-form">
+        Already have an account? <a href="#" onclick="switchToLogin()">Login</a>
+      </div>
+    </div>
+  </div>
+
   <!-- Notification -->
   <div id="notification" class="notification">
     <i class="fas fa-check-circle"></i>
@@ -975,8 +1497,229 @@
   </div>
 
   <script>
+    // Token Management
+    let tokenData = {
+      count: 50,
+      lastReset: Date.now(),
+      isLoggedIn: false,
+      user: null
+    };
+
+    // Initialize token system
+    function initTokenSystem() {
+      // Check if token data exists in localStorage
+      const savedTokenData = localStorage.getItem('tokenData');
+      if (savedTokenData) {
+        tokenData = JSON.parse(savedTokenData);
+      }
+      
+      // Check if tokens need to be reset
+      checkTokenReset();
+      
+      // Update UI
+      updateTokenDisplay();
+      
+      // Check if user is logged in
+      if (tokenData.isLoggedIn) {
+        showUserMenu();
+      }
+      
+      // Start token countdown
+      startTokenCountdown();
+    }
+
+    // Check if tokens need to be reset
+    function checkTokenReset() {
+      const now = Date.now();
+      const resetTime = tokenData.isLoggedIn ? 2.5 * 60 * 60 * 1000 : 3 * 60 * 60 * 1000; // 2.5 hours for logged-in, 3 hours for guests
+      
+      if (now - tokenData.lastReset >= resetTime) {
+        tokenData.count = tokenData.isLoggedIn ? 100 : 50;
+        tokenData.lastReset = now;
+        saveTokenData();
+      }
+    }
+
+    // Save token data to localStorage
+    function saveTokenData() {
+      localStorage.setItem('tokenData', JSON.stringify(tokenData));
+    }
+
+    // Update token display
+    function updateTokenDisplay() {
+      document.getElementById('tokenCount').textContent = tokenData.count;
+    }
+
+    // Start token countdown
+    function startTokenCountdown() {
+      setInterval(() => {
+        const now = Date.now();
+        const resetTime = tokenData.isLoggedIn ? 2.5 * 60 * 60 * 1000 : 3 * 60 * 60 * 1000;
+        const timeUntilReset = resetTime - (now - tokenData.lastReset);
+        
+        if (timeUntilReset <= 0) {
+          checkTokenReset();
+          updateTokenDisplay();
+        } else {
+          const hours = Math.floor(timeUntilReset / (60 * 60 * 1000));
+          const minutes = Math.floor((timeUntilReset % (60 * 60 * 1000)) / (60 * 1000));
+          const seconds = Math.floor((timeUntilReset % (60 * 1000)) / 1000);
+          
+          document.getElementById('tokenReset').textContent = 
+            `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+      }, 1000);
+    }
+
+    // Use a token
+    function useToken() {
+      if (tokenData.count > 0) {
+        tokenData.count--;
+        saveTokenData();
+        updateTokenDisplay();
+        return true;
+      } else {
+        showNotification('You have run out of tokens! Please wait for the reset.');
+        return false;
+      }
+    }
+
+    // Login Modal Functions
+    function openLoginModal() {
+      document.getElementById('loginModal').classList.add('active');
+    }
+
+    function closeLoginModal() {
+      document.getElementById('loginModal').classList.remove('active');
+    }
+
+    function openRegisterModal() {
+      document.getElementById('registerModal').classList.add('active');
+    }
+
+    function closeRegisterModal() {
+      document.getElementById('registerModal').classList.remove('active');
+    }
+
+    function switchToRegister() {
+      closeLoginModal();
+      openRegisterModal();
+    }
+
+    function switchToLogin() {
+      closeRegisterModal();
+      openLoginModal();
+    }
+
+    // Handle login
+    function handleLogin(event) {
+      event.preventDefault();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      
+      // For demo purposes, we'll just simulate a successful login
+      // In a real application, you would validate against a server
+      
+      // Simulate login success
+      tokenData.isLoggedIn = true;
+      tokenData.user = {
+        email: email,
+        name: email.split('@')[0] // Extract name from email for demo
+      };
+      
+      // Reset tokens for logged-in user
+      tokenData.count = 100;
+      tokenData.lastReset = Date.now();
+      
+      saveTokenData();
+      updateTokenDisplay();
+      showUserMenu();
+      closeLoginModal();
+      
+      showNotification('Login successful! You now have 100 tokens.');
+    }
+
+    // Handle register
+    function handleRegister(event) {
+      event.preventDefault();
+      
+      const name = document.getElementById('regName').value;
+      const email = document.getElementById('regEmail').value;
+      const password = document.getElementById('regPassword').value;
+      const confirmPassword = document.getElementById('regConfirmPassword').value;
+      
+      // Validate passwords match
+      if (password !== confirmPassword) {
+        showNotification('Passwords do not match!');
+        return;
+      }
+      
+      // For demo purposes, we'll just simulate a successful registration
+      // In a real application, you would send this data to a server
+      
+      // Simulate registration success and auto-login
+      tokenData.isLoggedIn = true;
+      tokenData.user = {
+        email: email,
+        name: name
+      };
+      
+      // Reset tokens for logged-in user
+      tokenData.count = 100;
+      tokenData.lastReset = Date.now();
+      
+      saveTokenData();
+      updateTokenDisplay();
+      showUserMenu();
+      closeRegisterModal();
+      
+      showNotification('Registration successful! You now have 100 tokens.');
+    }
+
+    // Show user menu
+    function showUserMenu() {
+      document.getElementById('loginBtn').style.display = 'none';
+      document.getElementById('userMenu').style.display = 'block';
+      
+      // Set user avatar
+      if (tokenData.user && tokenData.user.name) {
+        document.getElementById('userAvatar').textContent = tokenData.user.name.charAt(0).toUpperCase();
+      }
+    }
+
+    // Hide user menu
+    function hideUserMenu() {
+      document.getElementById('loginBtn').style.display = 'flex';
+      document.getElementById('userMenu').style.display = 'none';
+    }
+
+    // Toggle user dropdown
+    function toggleUserDropdown() {
+      document.getElementById('userDropdown').classList.toggle('active');
+    }
+
+    // Logout
+    function logout() {
+      tokenData.isLoggedIn = false;
+      tokenData.user = null;
+      
+      // Reset tokens for guest user
+      tokenData.count = 50;
+      tokenData.lastReset = Date.now();
+      
+      saveTokenData();
+      updateTokenDisplay();
+      hideUserMenu();
+      
+      showNotification('You have been logged out.');
+    }
+
     // Theme Toggle
     document.addEventListener('DOMContentLoaded', function() {
+      // Initialize token system
+      initTokenSystem();
+      
       // Check for saved theme preference
       if (localStorage.getItem('theme') === 'dark') {
         document.body.classList.add('dark-mode');
@@ -1042,6 +1785,21 @@
       answer.classList.toggle('active');
     }
 
+    // FAQ Tab Switching
+    function switchTab(tabName) {
+      // Update tab states
+      document.querySelectorAll('.faq-tab').forEach(tab => {
+        tab.classList.remove('active');
+      });
+      event.target.classList.add('active');
+      
+      // Update content visibility
+      document.querySelectorAll('.faq-content').forEach(content => {
+        content.classList.remove('active');
+      });
+      document.getElementById(tabName).classList.add('active');
+    }
+
     // Newsletter Subscription
     function subscribeNewsletter(event) {
       event.preventDefault();
@@ -1102,6 +1860,16 @@
       elementsToAnimate.forEach(el => {
         observer.observe(el);
       });
+    });
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+      const userMenu = document.getElementById('userMenu');
+      const userDropdown = document.getElementById('userDropdown');
+      
+      if (userMenu && userDropdown && !userMenu.contains(event.target)) {
+        userDropdown.classList.remove('active');
+      }
     });
   </script>
 </body>
